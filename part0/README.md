@@ -1,8 +1,8 @@
-># fullStackOpen/part0
+# fullStackOpen/part0
 
 Helsinki University [Full Stack Open Course](https://fullstackopen.com/) Part0
 
-># Exercises
+# Exercises
 
 >## 0.4: New note
 
