@@ -16,5 +16,6 @@ All necessary information for doing this, and the next two exercises, can be fou
 
 >## Solution
 
-![](https://raw.githubusercontent.com/EGRrqq/fullStackOpen/main/part0/0.4.png)
+![](https://github.com/EGRrqq/fullStackOpen/raw/main/part0/0.4.png)
+
 
