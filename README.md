@@ -4,4 +4,4 @@
  
 # General
 
-![](https://i.ibb.co/dpJ0p2P/part0.jpg)
+[![](https://i.ibb.co/dpJ0p2P/part0.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part0#fullstackopenpart0)
