@@ -4,6 +4,6 @@
  
 # General
 
-[![](https://i.ibb.co/dpJ0p2P/part0.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part0#fullstackopenpart0)
+[![](https://i.ibb.co/HtXnZP9/part0.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part0#fullstackopenpart0)
 
 >Part 0: Fundamentals of Web apps
