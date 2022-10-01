@@ -1,6 +1,6 @@
 # fullStackOpen/part0
 
->Helsinki University [Full Stack Open Course](https://fullstackopen.com/en/)
+>Helsinki University [Full Stack Open Course](https://fullstackopen.com/en/){:target="_blank"}
  
 # General
 
