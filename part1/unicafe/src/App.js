@@ -19,12 +19,34 @@ const Statistics = ({good, bad, neutral}) => {
     }
     return (
         <div>
-            <StatisticLine text='good ' value={good} />
-            <StatisticLine text='neutral ' value={neutral} />
-            <StatisticLine text='bad ' value={bad} />
-            <StatisticLine text='all ' value={all} />
-            <StatisticLine text='average ' value={average} />
-            <StatisticLine text='positive ' value={positive} />
+            <table>
+                <tbody>
+                    <tr>
+                        <th><StatisticLine text='good ' /></th>
+                        <td><StatisticLine value={good} /></td>
+                    </tr>
+                    <tr>
+                        <th><StatisticLine text='neutral ' /></th>
+                        <td><StatisticLine value={neutral} /></td>
+                    </tr>
+                    <tr>
+                        <th><StatisticLine text='bad ' /></th>
+                        <td><StatisticLine value={bad} /></td>
+                    </tr>
+                    <tr>
+                        <th><StatisticLine text='all ' /></th>
+                        <td><StatisticLine value={all} /></td>
+                    </tr>
+                    <tr>
+                        <th><StatisticLine text='average ' /></th>
+                        <td><StatisticLine value={average} /></td>
+                    </tr>
+                    <tr>
+                        <th><StatisticLine text='positive ' /></th>
+                        <td><StatisticLine value={positive} /></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     )
 }
@@ -48,7 +70,7 @@ const App = () => {
             <Button handleClick={() => setToBad(bad + 1)} text='bad'/>
 
             <Header text='statistics'/>
-            
+
             <Statistics good={good} bad={bad} neutral={neutral}/>
         </div>
     )
