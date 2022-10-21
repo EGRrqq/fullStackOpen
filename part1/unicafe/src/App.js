@@ -64,13 +64,10 @@ const App = () => {
     return (
         <div>
             <Header text='give feedback'/>
-
             <Button handleClick={() => setToGood(good + 1)} text='good'/>
             <Button handleClick={() => setToNeutral( neutral + 1)} text='neutral'/>
             <Button handleClick={() => setToBad(bad + 1)} text='bad'/>
-
             <Header text='statistics'/>
-
             <Statistics good={good} bad={bad} neutral={neutral}/>
         </div>
     )
