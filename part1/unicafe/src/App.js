@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const Display = (props) => <div>{props.text}{props.feedback}</div>
+const StatisticLine  = (props) => <div>{props.text}{props.value}</div>
 const Header = (props) => <h2>{props.text}</h2>
 const Button = (props) => (
     <button onClick={props.handleClick}>
@@ -19,12 +19,12 @@ const Statistics = ({good, bad, neutral}) => {
     }
     return (
         <div>
-            <Display text='good ' feedback={good} />
-            <Display text='neutral ' feedback={neutral} />
-            <Display text='bad ' feedback={bad} />
-            <Display text='all ' feedback={all} />
-            <Display text='average ' feedback={average} />
-            <Display text='positive ' feedback={positive} />
+            <StatisticLine text='good ' value={good} />
+            <StatisticLine text='neutral ' value={neutral} />
+            <StatisticLine text='bad ' value={bad} />
+            <StatisticLine text='all ' value={all} />
+            <StatisticLine text='average ' value={average} />
+            <StatisticLine text='positive ' value={positive} />
         </div>
     )
 }
@@ -38,7 +38,6 @@ const App = () => {
     const setToGood = (newValue) => setGood(newValue)
     const setToNeutral = (newValue) => setNeutral(newValue)
     const setToBad = (newValue) => setBad(newValue)
-
 
     return (
         <div>
