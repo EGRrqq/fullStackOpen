@@ -1,14 +1,10 @@
-const Part = ({ name,  exercises }) => {
-    return (
-        <p>{name} {exercises}</p>
-    )
-}
-
+const Part = ({ part }) => (
+    <p>{part.name} {part.exercises}</p>
+)
 
 const Content = ({ parts }) => {
-    return parts.map((obj) => {
-        return <Part key={parts.id} name={obj.name} exercises={obj.exercises} />;
+    return parts.map((part) => {
+        return <Part key={parts.id} part={part} />;
     });
 }
-
 export default Content
