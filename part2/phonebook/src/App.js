@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [persons, setPersons] = useState([
+        { name: 'Arto Hellas', id: 1}
+    ])
+    const [newName, setNewName] = useState('')
+
+    const addPerson = (event) => {
+        event.preventDefault()
+        const personObject = {
+            name: newName,
+            id: persons.length + 1
+        }
+
+        setPersons(persons.concat(personObject))
+        setNewName('')
+    }
+
+    const handleNoteChange = (event) => {
+        console.log(event.target.value)
+        setNewName(event.target.value)
+    }
+
+    return (
+        <div>
+            <h2>Phonebook</h2>
+            <form onSubmit={addPerson}>
+                <div>
+                    name: <input value={newName} onChange={handleNoteChange}/>
+                </div>
+                <div>
+                    <button type="submit">add</button>
+                </div>
+            </form>
+            <h2>Numbers</h2>
+            <div>
+                {persons.map(element => {
+                    console.log('element', element)
+                    return (
+                        <div>
+                            {element.name}
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
 }
 
-export default App;
+export default App
