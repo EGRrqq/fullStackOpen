@@ -13,12 +13,19 @@ const App = () => {
             id: persons.length + 1
         }
 
+        for (let element of persons) {
+            console.log('element name', element.name)
+            if (element.name === newName) {
+                alert(`${newName} is already added to phonebook`)
+                return
+            }
+        }
+        
         setPersons(persons.concat(personObject))
         setNewName('')
     }
 
     const handleNoteChange = (event) => {
-        console.log(event.target.value)
         setNewName(event.target.value)
     }
 
@@ -36,9 +43,8 @@ const App = () => {
             <h2>Numbers</h2>
             <div>
                 {persons.map(element => {
-                    console.log('element', element)
                     return (
-                        <div>
+                        <div key={element.id}>
                             {element.name}
                         </div>
                     )
