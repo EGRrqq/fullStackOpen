@@ -1,5 +1,50 @@
 import { useState } from 'react'
 
+const Filter = (props) => {
+    return (
+        <div>
+            filter shown with <input value={props.value} onChange={props.onChange} />
+        </div>
+    )
+}
+
+const PersonForm = (props) => {
+    return (
+        <form onSubmit={props.onFormSubmit}>
+            <div>
+                name: <input value={props.newNameValue} onChange={props.onNameChange} />
+            </div>
+            <div>
+                number: <input value={props.newNumberValue} onChange={props.onNumberChange} />
+            </div>
+            <div>
+                <button type="submit">add</button>
+            </div>
+        </form>
+    )
+}
+
+const ShowPerson = (props) => {
+    return (
+        <div>
+            {props.name} {props.number}
+        </div>
+    )
+}
+
+const ShowPersons = (props) => {
+    return (
+        <div>
+            {props.persons.map(person =>
+                <ShowPerson
+                    key={person.id}
+                    name={person.name}
+                    number={person.number} />
+            )}
+        </div>
+    )
+}
+
 const App = () => {
     const [persons, setPersons] = useState([
         { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -9,7 +54,7 @@ const App = () => {
     ])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
-    const [filter, setNewFilter] = useState('')
+    const [newFilter, setNewFilter] = useState('')
 
     const addPerson = (event) => {
         event.preventDefault()
@@ -20,7 +65,6 @@ const App = () => {
         }
 
         for (let element of persons) {
-            console.log('element name', element.name)
             if (element.name === newName) {
                 alert(`${newName} is already added to phonebook`)
                 return
@@ -32,14 +76,18 @@ const App = () => {
         setNewNumber('')
     }
 
-    const filterResult = () => {
-        const regExp = new RegExp(filter, 'i')
+    const personFilter = () => {
+        const regExp = new RegExp(newFilter, 'i')
         return persons.filter( person => person.name.match(regExp))
     }
 
-    const personsToShow = filterResult()
+    const personsToShow = personFilter()
 
-    const handleNoteChange = (event) => {
+    const handleFilterChange = (event) => {
+        setNewFilter(event.target.value)
+    }
+
+    const handleNameChange = (event) => {
         setNewName(event.target.value)
     }
 
@@ -47,40 +95,20 @@ const App = () => {
         setNewNumber(event.target.value)
     }
 
-    const handleFilter = (event) => {
-        setNewFilter(event.target.value)
-    }
-
     return (
         <div>
-            <h2>Phonebook</h2>
-            <form>
-                <div>
-                    filter shown with <input value={filter} onChange={handleFilter}/>
-                </div>
-            </form>
-            <h2>add a new</h2>
-            <form onSubmit={addPerson}>
-                <div>
-                    name: <input value={newName} onChange={handleNoteChange}/>
-                </div>
-                <div>
-                    number: <input value={newNumber} onChange={handleNumberChange}/>
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
-            <h2>Numbers</h2>
-            <div>
-                {personsToShow.map(element => {
-                    return (
-                        <div key={element.id}>
-                            {element.name} {element.number}
-                        </div>
-                    )
-                })}
-            </div>
+            <h3>Phonebook</h3>
+            <Filter value={newFilter} onChange={handleFilterChange} />
+            <h3>Add a new</h3>
+            <PersonForm
+                onFormSubmit={addPerson}
+                newNameValue={newName}
+                onNameChange={handleNameChange}
+                newNumberValue={newNumber}
+                onNumberChange={handleNumberChange}
+            />
+            <h3>Numbers</h3>
+            <ShowPersons persons={personsToShow}/>
         </div>
     )
 }
