@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
+import axios from "axios";
 
 const Filter = (props) => {
     return (
@@ -56,6 +57,14 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('')
     const [newFilter, setNewFilter] = useState('')
 
+    useEffect(() => {
+        axios
+            .get('http://localhost:3001/persons')
+            .then(response => {
+                setPersons(response.data)
+            })
+    }, [])
+
     const addPerson = (event) => {
         event.preventDefault()
         const personObject = {
@@ -76,12 +85,10 @@ const App = () => {
         setNewNumber('')
     }
 
-    const personFilter = () => {
+    const personsToShow = () => {
         const regExp = new RegExp(newFilter, 'i')
         return persons.filter( person => person.name.match(regExp))
     }
-
-    const personsToShow = personFilter()
 
     const handleFilterChange = (event) => {
         setNewFilter(event.target.value)
@@ -108,7 +115,7 @@ const App = () => {
                 onNumberChange={handleNumberChange}
             />
             <h3>Numbers</h3>
-            <ShowPersons persons={personsToShow}/>
+            <ShowPersons persons={personsToShow()} />
         </div>
     )
 }
