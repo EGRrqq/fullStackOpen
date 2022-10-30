@@ -1,54 +1,65 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-const Filter = ({value, onChange}) => {
+const Filter = ({ value, onChange }) => {
     return (
-        <div>
+        <>
             find countries: <input value={value} onChange={onChange} />
-        </div>
+        </>
     )
 }
 
-const ShowCountry = ({ countriesToShow }) => {
+const Country = ({ countriesToShow }) => {
     return (
-        <div>
-            <h2>{countriesToShow[0].name.common}</h2>
-            <div>capital {countriesToShow[0].capital}</div>
-            <div>area {countriesToShow[0].area}</div>
+        <>
+            <h2>{countriesToShow.name.common}</h2>
+            <div>capital {countriesToShow.capital}</div>
+            <div>area {countriesToShow.area}</div>
             <div>
                 <h3>languages</h3>
                 <ul>
-                    {Object.values(countriesToShow[0].languages).map(
+                    {Object.values(countriesToShow.languages).map(
                         (language, index) => <li key={index}>{language}</li>
                     )}
                 </ul>
-                <img src={countriesToShow[0].flags.svg} alt={countriesToShow[0].name.common + " flag"} height="150" width="150" />
+                <img src={countriesToShow.flags.svg} alt={countriesToShow.name.common + " flag"} height="150" width="150" />
             </div>
-        </div>
+        </>
+    )
+}
+
+const Button = ({ countriesToShow }) => {
+    const [showCountry, setShowCountry] = useState(false);
+    const handleShowCountryChange = () => setShowCountry(!showCountry);
+    return (
+        <>
+            <button onClick={handleShowCountryChange}>{showCountry ? 'hide' : 'show'}</button>
+            {showCountry && <Country countriesToShow={countriesToShow} />}
+        </>
     )
 }
 
 const ShowCountries = ({ value, countriesToShow }) => {
-    console.log(countriesToShow.length)
-    console.log(value)
     if (value === '') {
         return (
             <></>
         )
     } else if (countriesToShow.length === 1) {
         return (
-            <ShowCountry countriesToShow={countriesToShow} />
+            <Country countriesToShow={countriesToShow[0]} />
         )
     } else if (countriesToShow.length <= 10 && countriesToShow.length > 1) {
         return (
             <div>
-                {countriesToShow.map(country =>
-                    <div key={country.name.common}>
+                {countriesToShow.map((country, index) =>
+                    <div key={index}>
                         {country.name.common}
+                        <Button countriesToShow={countriesToShow[index]} />
                     </div>
                 )}
             </div>
         )
+
     } else {
         return (
             <p>Too many matches, specify another filter</p>
