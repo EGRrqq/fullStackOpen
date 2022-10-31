@@ -22,7 +22,6 @@ const ShowCountries = ({ value, countriesToShow }) => {
                 )}
             </div>
         )
-
     } else {
         return (
             <p>Too many matches, specify another filter</p>
