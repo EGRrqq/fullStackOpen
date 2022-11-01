@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
 import personService from "./services/persons"
 
-
 const Filter = (props) => {
     return (
         <div>
@@ -71,24 +70,34 @@ const App = () => {
             /*id: persons.length + 1*/
         }
 
-        for (let element of persons) {
-            if (element.name === newName) {
-                alert(`${newName} is already added to phonebook`)
-                return
-            }
-        }
+        const personToCheck = persons.some(person => person.name.toLowerCase().trim() === newName.toLowerCase().trim())
+        const personToFind = persons.find(person => person.name.toLowerCase().trim() === newName.toLowerCase().trim())
 
-        personService
-            .create(personObject)
-            .then(returnedPersons => {
-                setPersons(persons.concat(returnedPersons))
-                setNewName('')
-                setNewNumber('')
-            })
+        if (personToCheck) {
+            if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+                personService
+                    .update(personToFind.id, personObject)
+                    .then(response => {
+                        setPersons(persons.map(element => element.id !== personToFind.id ? element : response))
+                        setNewName('')
+                        setNewNumber('')
+                    })
+                return
+                }
+            }
+        else {
+            personService
+                .create(personObject)
+                .then(returnedPersons => {
+                    setPersons(persons.concat(returnedPersons))
+                    setNewName('')
+                    setNewNumber('')
+                })
+        }
     }
 
     const regExp = new RegExp(newFilter, 'i')
-    const personsToShow =  persons.filter( person => person.name.match(regExp))
+    const personsToShow =  persons.filter(person => person.name.match(regExp))
 
     const handleFilterChange = (event) => {
         setNewFilter(event.target.value)
