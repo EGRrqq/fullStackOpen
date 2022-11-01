@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
-import axios from "axios";
+import personService from "./services/persons"
+
 
 const Filter = (props) => {
     return (
@@ -40,28 +41,24 @@ const ShowPersons = (props) => {
                 <ShowPerson
                     key={person.id}
                     name={person.name}
-                    number={person.number} />
+                    number={person.number}
+                />
             )}
         </div>
     )
 }
 
 const App = () => {
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '040-123456', id: 1 },
-        { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-        { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-        { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-    ])
+    const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [newFilter, setNewFilter] = useState('')
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                setPersons(response.data)
+        personService
+            .getAll()
+            .then(initialPersons => {
+                setPersons(initialPersons)
             })
     }, [])
 
@@ -80,15 +77,17 @@ const App = () => {
             }
         }
 
-        setPersons(persons.concat(personObject))
-        setNewName('')
-        setNewNumber('')
+        personService
+            .create(personObject)
+            .then(returnedPersons => {
+                setPersons(persons.concat(returnedPersons))
+                setNewName('')
+                setNewNumber('')
+            })
     }
 
-    const personsToShow = () => {
-        const regExp = new RegExp(newFilter, 'i')
-        return persons.filter( person => person.name.match(regExp))
-    }
+    const regExp = new RegExp(newFilter, 'i')
+    const personsToShow =  persons.filter( person => person.name.match(regExp))
 
     const handleFilterChange = (event) => {
         setNewFilter(event.target.value)
@@ -115,7 +114,7 @@ const App = () => {
                 onNumberChange={handleNumberChange}
             />
             <h3>Numbers</h3>
-            <ShowPersons persons={personsToShow()} />
+            <ShowPersons persons={personsToShow} />
         </div>
     )
 }
