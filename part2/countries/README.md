@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Exercises
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 2.1 - 2.5: [courseinfo](https://github.com/EGRrqq/fullStackOpen/tree/main/part2/courseinfo)
 
-## Available Scripts
+## 2.12\* Data for countries, step1
 
-In the project directory, you can run:
+The API https://restcountries.com provides data for different countries in a machine-readable format, a so-called REST API.
 
-### `npm start`
+Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint all.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
 
-### `npm test`
+![Query](https://i.ibb.co/xFrNzZR/2-12-1.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
-### `npm run build`
+![Result](https://i.ibb.co/MMPK6hQ/2-12-2.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken there, are shown:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Country](https://i.ibb.co/3vQm0kk/2-12-3.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**NB:** It is enough that your application works for most of the countries. Some countries, like Sudan, can be hard to support, since the name of the country is part of the name of another country,
+South Sudan. You don't need to worry about these edge cases.
 
-### `npm run eject`
+**WARNING** `create-react-app` will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of
+your projects to be a separate repository**, so simply run the `rm -rf .git` command at the root of your application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 2.13\*: Data for countries, step2
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows
+the view for that country:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![The View](https://i.ibb.co/4MR06TK/2-13.png)
 
-## Learn More
+In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like _Sudan_, can be ignored.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 2.14\*: Data for countries, step3
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-### Code Splitting
+Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is
+https://openweathermap.org. Note that it might take some minutes until a generated api key is valid.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Weather](https://i.ibb.co/Mf07wQH/2-14.png)
 
-### Analyzing the Bundle Size
+If you use Open weather map, here is the description how to get weather icons.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that `HTTPS` encryption is not supported, although the request URL starts with `http://`. This
+issue can be fixed by completing the exercise using Chrome.
 
-### Making a Progressive Web App
+**NB:** You need an `api-key` to use almost every weather service. Do not save the `api-key` to source control! Nor hardcode the `api-key` to your source code. Instead use an environment variable to
+save the key.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Assuming the api-key is _t0p53cr3t4p1k3yv4lu3_, when the application is started like so:
 
-### Advanced Configuration
+```bash
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+you can access the value of the key from the `process.env` object:
 
-### Deployment
+```js
+const api_key = process.env.REACT_APP_API_KEY
+// variable api_key has now the value set in startup
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with
+`REACT_APP_`. You can also use a .envfile rather than defining it on the command line each time by creating a file entitled `.env` in the root of the project and adding the following.
 
-### `npm run build` fails to minify
+```bash
+# .env
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
+```
+
+Note that you will need to restart the server to apply the changes.
+
+## 2.6 - 2.11, 2.15 - 2.20: [phonebook](https://github.com/EGRrqq/fullStackOpen/tree/main/part2/phonebook)

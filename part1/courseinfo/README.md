@@ -38,25 +38,25 @@ only submit the final state of the application. If desired, you may also create 
 Use `create-react-app` to initialize a new application. Modify `index.js` to match the following
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from './App';
+import App from './App'
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 and _App.js_ to match the following
 
 ```js
 const App = () => {
-    const course = 'Half Stack application development';
-    const part1 = 'Fundamentals of React';
-    const exercises1 = 10;
-    const part2 = 'Using props to pass data';
-    const exercises2 = 7;
-    const part3 = 'State of a component';
-    const exercises3 = 14;
+    const course = 'Half Stack application development'
+    const part1 = 'Fundamentals of React'
+    const exercises1 = 10
+    const part2 = 'Using props to pass data'
+    const exercises2 = 7
+    const part3 = 'State of a component'
+    const exercises3 = 14
 
     return (
         <div>
@@ -72,10 +72,10 @@ const App = () => {
             </p>
             <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
         </div>
-    );
-};
+    )
+}
 
-export default App;
+export default App
 ```
 
 and remove extra files (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js)).
@@ -134,9 +134,9 @@ follows:
 
 ```js
 const Header = (props) => {
-    console.log(props);
-    return <h1>{props.course}</h1>;
-};
+    console.log(props)
+    return <h1>{props.course}</h1>
+}
 ```
 
 ## 1.3: course information step3
@@ -145,22 +145,22 @@ Let's move forward to using objects in our application. Modify the variable defi
 
 ```js
 const App = () => {
-    const course = 'Half Stack application development';
+    const course = 'Half Stack application development'
     const part1 = {
         name: 'Fundamentals of React',
         exercises: 10
-    };
+    }
     const part2 = {
         name: 'Using props to pass data',
         exercises: 7
-    };
+    }
     const part3 = {
         name: 'State of a component',
         exercises: 14
-    };
+    }
 
-    return <div>...</div>;
-};
+    return <div>...</div>
+}
 ```
 
 ## 1.4: course information step4
@@ -169,7 +169,7 @@ And then place the objects into an array. Modify the variable definitions of _Ap
 
 ```js
 const App = () => {
-    const course = 'Half Stack application development';
+    const course = 'Half Stack application development'
     const parts = [
         {
             name: 'Fundamentals of React',
@@ -183,10 +183,10 @@ const App = () => {
             name: 'State of a component',
             exercises: 14
         }
-    ];
+    ]
 
-    return <div>...</div>;
-};
+    return <div>...</div>
+}
 ```
 
 **NB** at this point you can assume that there are always three items, so there is no need to go through the arrays using loops. We will come back to the topic of rendering components based on items
@@ -204,8 +204,8 @@ const App = () => {
             <Content parts={parts} />
             <Total parts={parts} />
         </div>
-    );
-};
+    )
+}
 ```
 
 ## 1.5: course information step5
@@ -230,10 +230,10 @@ const App = () => {
                 exercises: 14
             }
         ]
-    };
+    }
 
-    return <div>...</div>;
-};
+    return <div>...</div>
+}
 ```
 
 ## 1.6 - 1.11: [unicafe](https://github.com/EGRrqq/fullStackOpen/tree/main/part1/unicafe)
