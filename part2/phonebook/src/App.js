@@ -26,7 +26,6 @@ const App = () => {
         const personObject = {
             name: newName,
             number: newNumber,
-            /*id: persons.length + 1*/
         }
 
         const personToCheck = persons.some(person => person.name.toLowerCase().trim() === newName.toLowerCase().trim())
@@ -48,17 +47,15 @@ const App = () => {
                         resetNotification()
                     })
                     .catch((error) => {
-                        console.log(error)
+                        console.log(error.response.data.error)
                         setMessage({
                             type: 'error',
-                            content: `Information of ${personObject.name} has already been removed from server`
+                            content: error.response.data.error,
                         })
                         resetNotification()
-                        setPersons(persons.filter(person => person.name !== newName))
                     })
             }
-        }
-        else {
+        } else {
             personService
                 .create(personObject)
                 .then(returnedPerson => {
@@ -69,6 +66,14 @@ const App = () => {
                     })
                     setNewName('')
                     setNewNumber('')
+                    resetNotification()
+                })
+                .catch((error) => {
+                    console.log(error.response.data.error)
+                    setMessage({
+                        type: 'error',
+                        content: error.response.data.error,
+                    })
                     resetNotification()
                 })
         }
@@ -107,6 +112,15 @@ const App = () => {
                         content: `Information of ${personToDelete.name} has been removed successfully`
                     })
                     resetNotification()
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setMessage({
+                        type: 'error',
+                        content: `Information of ${personToDelete.name} has already been removed from server`
+                    })
+                    resetNotification()
+                    setPersons(persons.filter(person => person.name !== newName))
                 })
         }
     }
