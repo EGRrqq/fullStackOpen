@@ -102,13 +102,25 @@ describe('favorite blog', () => {
 })
 
 describe('the author with the most blogs', () => {
-    const mostBlogs = {
+    const maxBlogs = {
         author: "Robert C. Martin",
         blogs: 3
     }
 
     test('is defined correctly', () => {
         const result = listHelper.mostBlogs(blogs)
-        expect(result).toEqual(mostBlogs)
+        expect(result).toEqual(maxBlogs)
+    })
+})
+
+describe('the author with the most likes', () => {
+    const maxLikes = {
+        author: "Edsger W. Dijkstra",
+        likes: 17
+    }
+
+    test('is defined correctly', () => {
+        const result = listHelper.mostLikes(blogs)
+        expect(result).toEqual(maxLikes)
     })
 })
