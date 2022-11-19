@@ -79,8 +79,8 @@ describe('addition of a new blog', () => {
             "Canonical string reduction"
         )
     })
-//'fails with status code 400 if data invalid'
-    test('blog without url is not added', async () => {
+
+    test('fails with status code 400 if url is invalid', async () => {
         const newBlog = {
             title: "yeeeeeet",
             author: "yeat",
@@ -95,7 +95,7 @@ describe('addition of a new blog', () => {
         expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
     })
 
-    test('blog without title is not added', async () => {
+    test('fails with status code 400 if title is invalid', async () => {
         const newBlog = {
             author: "Thaiboy Goon",
             url: "genius.com",
@@ -110,7 +110,7 @@ describe('addition of a new blog', () => {
         expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
     })
 
-    test('if likes property is missing, it will default to the value 0', async () => {
+    test('if likes is missing, the default value will be 0', async () => {
         const newBlog = {
             title: 'YOOooooooo',
             url: 'google.com',
