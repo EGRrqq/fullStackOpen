@@ -12,6 +12,6 @@
 |--------------------------------------------------------------------------------------------------|-----|--------------------------------------------------------------------------------------------------|  
 | **Part 2:** Communicating with server                                                                |     | **Part 3:** Programming a server <br/>with NodeJS and Express                                        | 
 
-| [![](https://i.ibb.co/WxnkQMK/part4.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part2) |     | [![](https://i.ibb.co/y48xPFT/part5.jpg)](https://github.com/EGRrqq/fullStackOpen_part3) |      
+| [![](https://i.ibb.co/WxnkQMK/part4.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part4) |     | [![](https://i.ibb.co/y48xPFT/part5.jpg)](https://github.com/EGRrqq/fullStackOpen_part5) |      
 |----------------------------------------------------------------------------------------------------|-----|------------------------------------------------------------------------------------------|  
-| **Part 4:** Testing Express servers, <br/>user administration                                                          |     | **Part 5:** Testing React apps                                                           | 
+| **Part 4:** Testing Express servers, <br/>user administration                                      |     | **Part 5:** Testing React apps                                                           |
