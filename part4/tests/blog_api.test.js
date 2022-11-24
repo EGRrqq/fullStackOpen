@@ -9,7 +9,7 @@ const Blog = require('../models/blog')
 
 beforeEach(async () => {
     await Blog.deleteMany({})
-
+    
     for (let blog of helper.initialBlogs) {
         let blogObject = new Blog(blog)
         await blogObject.save()
@@ -64,8 +64,16 @@ describe('addition of a new blog', () => {
             likes: 12,
         }
 
+        const userRoot = {
+            username: 'root',
+            password: 'sekret'
+        }
+
+        const userRootLogin = await api.post('/api/login').send(userRoot)
+
         await api
             .post('/api/blogs')
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -81,14 +89,37 @@ describe('addition of a new blog', () => {
         )
     })
 
+    test('fails with status code 401 if token is invalid', async () => {
+        const newBlog = {
+            title: "jersey",
+            author: "jersey",
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(401)
+
+        const blogsAtEnd = await helper.blogsInDb()
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+    })
+
     test('fails with status code 400 if url is invalid', async () => {
         const newBlog = {
             title: "yeeeeeet",
             author: "yeat",
         }
 
+        const userRoot = {
+            username: 'root',
+            password: 'sekret'
+        }
+
+        const userRootLogin = await api.post('/api/login').send(userRoot)
+
         await api
             .post('/api/blogs')
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
             .send(newBlog)
             .expect(400)
 
@@ -102,8 +133,16 @@ describe('addition of a new blog', () => {
             url: "genius.com",
         }
 
+        const userRoot = {
+            username: 'root',
+            password: 'sekret'
+        }
+
+        const userRootLogin = await api.post('/api/login').send(userRoot)
+
         await api
             .post('/api/blogs')
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
             .send(newBlog)
             .expect(400)
 
@@ -117,8 +156,16 @@ describe('addition of a new blog', () => {
             url: 'google.com',
         }
 
+        const userRoot = {
+            username: 'root',
+            password: 'sekret'
+        }
+
+        const userRootLogin = await api.post('/api/login').send(userRoot)
+
         await api
             .post('/api/blogs')
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -135,16 +182,38 @@ describe('addition of a new blog', () => {
 
 describe('deletion of a blog', () => {
     test('succeeds with status code 204 if id is valid', async () => {
-        const blogsAtStart = await helper.blogsInDb()
-        const blogToDelete = blogsAtStart[0]
+        const newBlogToDelete = {
+            title: "DELETE",
+            author: "DELETE",
+            url: "DELETE",
+            likes: 523,
+        }
+
+        const userRoot = {
+            username: 'root',
+            password: 'sekret'
+        }
+
+        const userRootLogin = await api.post('/api/login').send(userRoot)
+
+        await api
+            .post('/api/blogs')
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
+            .send(newBlogToDelete)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+
+        const blogsToFind = await helper.blogsInDb()
+        const blogToDelete = blogsToFind[blogsToFind.length - 1]
 
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
+            .set('Authorization', `bearer ${userRootLogin.body.token}`)
             .expect(204)
 
         const blogsAtEnd = await helper.blogsInDb()
         expect(blogsAtEnd).toHaveLength(
-            helper.initialBlogs.length - 1
+            helper.initialBlogs.length
         )
 
         const titles = blogsAtEnd.map(r => r.title)
