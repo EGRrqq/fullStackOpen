@@ -9,7 +9,7 @@ const Blog = require('../models/blog')
 
 beforeEach(async () => {
     await Blog.deleteMany({})
-    
+
     for (let blog of helper.initialBlogs) {
         let blogObject = new Blog(blog)
         await blogObject.save()
