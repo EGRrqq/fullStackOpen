@@ -9,14 +9,14 @@ import loginService from './services/login'
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
-    const [errorMessage, setErrorMessage] = useState(null)
+    const [notification, setNotification] = useState({ type: null, content: null })
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
-
+    
     useEffect(() => {
         blogService.getAll().then(blogs =>
             setBlogs( blogs )
@@ -47,11 +47,21 @@ const App = () => {
             setUsername('')
             setPassword('')
         } catch (exception) {
-            setErrorMessage('Wrong credentials')
+            setNotification({
+                type: 'error',
+                content: exception.response.data.error,
+            })
             setTimeout(() => {
-                setErrorMessage(null)
+                setNotification(null)
             }, 5000)
+            clearNotification()
         }
+    }
+
+    const clearNotification = () => {
+        setTimeout(() => {
+            setNotification({ type: null, content: null })
+        }, 5000)
     }
 
     const handleLogout = () => {
@@ -61,15 +71,29 @@ const App = () => {
 
     const handleCreate  = async (event) => {
         event.preventDefault()
-        const blogObject = {
-            title, author, url
-        }
+        try {
+            const blogObject = {
+                title, author, url
+            }
 
-        const createdBlog = await blogService.create(blogObject)
-        setBlogs(blogs.concat(createdBlog))
-        setTitle('')
-        setAuthor('')
-        setUrl('')
+            const createdBlog = await blogService.create(blogObject)
+            setBlogs(blogs.concat(createdBlog))
+            setTitle('')
+            setAuthor('')
+            setUrl('')
+            setNotification({
+                type: 'success',
+                content: `a new blog ${createdBlog.title} by ${createdBlog.author} added`,
+            })
+            clearNotification()
+        } catch (exception) {
+            console.log(exception)
+            setNotification({
+                type: 'error',
+                content: exception.response.data.error,
+            })
+            clearNotification()
+        }
     }
 
     const handleTitleChange = (event) => {
@@ -89,7 +113,7 @@ const App = () => {
             <div>
                 <h2>Log in to application</h2>
 
-                <Notification message={errorMessage}/>
+                <Notification message={notification}/>
 
                 <LoginForm
                     handleLogin={handleLogin}
@@ -105,6 +129,8 @@ const App = () => {
     return (
         <div>
             <h2>blogs</h2>
+
+            <Notification message={notification}/>
 
             <p>
                 {user.username} logged in
