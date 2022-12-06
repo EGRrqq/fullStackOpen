@@ -12,18 +12,22 @@ const getAll = () => {
     return request.then(response => response.data)
 }
 
-const create = async newObject => {
+const create = async (blogObj) => {
     const config = {
         headers: { Authorization: token },
     }
 
-    const response = await axios.post(baseUrl, newObject, config)
+    const response = await axios.post(baseUrl, blogObj, config)
     return response.data
 }
 
-const update = (id, newObject) => {
-    const request = axios.put(`${ baseUrl }/${id}`, newObject)
-    return request.then(response => response.data)
+const update = async (updatedBlogObj) => {
+    const config = {
+        headers: { Authorization: token },
+    }
+
+    const response = await axios.put(`${baseUrl}/${updatedBlogObj.id}`, updatedBlogObj, config)
+    return response.data
 }
 
 export default { getAll, create, update, setToken }
