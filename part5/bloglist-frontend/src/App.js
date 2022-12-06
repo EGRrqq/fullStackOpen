@@ -85,9 +85,8 @@ const App = () => {
             <div>
                 <h2>Log in to application</h2>
 
-                <Notification message={notification}/>
-
-                <LoginForm submitUser={handleLogin}/>
+                <Notification message={notification} />
+                <LoginForm submitUser={handleLogin} />
             </div>
         )
     }
@@ -96,7 +95,7 @@ const App = () => {
         <div>
             <h2>blogs</h2>
 
-            <Notification message={notification}/>
+            <Notification message={notification} />
 
             <p>
                 {user.username} logged in
