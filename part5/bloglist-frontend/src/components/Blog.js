@@ -23,7 +23,10 @@ const Blog = ({ blog }) => {
             <button onClick={toggleDetails}>{visible ? 'hide' : 'show'}</button>
             <div style={hideDetails}>
                 <div>{blog.url}</div>
-                <div>likes: {blog.likes} <button>like</button></div>
+                <div>
+                    likes: {blog.likes}
+                    <button>like</button>
+                </div>
                 <div>{blog.user.name}</div>
             </div>
         </div>
