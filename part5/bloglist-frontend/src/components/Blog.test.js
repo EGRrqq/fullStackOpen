@@ -16,17 +16,16 @@ describe('<Blog />', () => {
     }
 
     const mockHandler = jest.fn()
-    const user = userEvent.setup()
-
-    const { container } = render(
-        <Blog
-            blog={blog}
-            updateBlog={mockHandler}
-            deleteBlog={mockHandler}
-        />
-    )
 
     test('component, displays only the blog renders and blog title', async () => {
+        const { container } = render(
+            <Blog
+                blog={blog}
+                updateBlog={mockHandler}
+                deleteBlog={mockHandler}
+            />
+        )
+
         const element = container.querySelector('.blog-container')
         const details = container.querySelector('.blog-details')
 
@@ -35,6 +34,16 @@ describe('<Blog />', () => {
     })
 
     test('after clicking on the button, the blog url and number of likes are displayed', async () => {
+        const { container } = render(
+            <Blog
+                blog={blog}
+                updateBlog={mockHandler}
+                deleteBlog={mockHandler}
+            />
+        )
+
+        const user = userEvent.setup()
+
         const button = screen.getByText('show')
         await user.click(button)
 
@@ -43,6 +52,16 @@ describe('<Blog />', () => {
     })
 
     test('if the like button is clicked twice, the event handler is called twice', async () => {
+        const { container } = render(
+            <Blog
+                blog={blog}
+                updateBlog={mockHandler}
+                deleteBlog={mockHandler}
+            />
+        )
+
+        const user = userEvent.setup()
+
         const likeButton = screen.getByText('like')
 
         await user.click(likeButton)

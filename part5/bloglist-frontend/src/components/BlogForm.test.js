@@ -12,13 +12,14 @@ describe('<BlogForm />', () => {
     }
 
     const mockHandler = jest.fn()
-    const user = userEvent.setup()
-
-    const { container } = render(
-        <BlogForm createBlog={mockHandler} />
-    )
 
     test('form calls the event handler when a new blog is created', async () => {
+        const { container } = render(
+            <BlogForm createBlog={mockHandler} />
+        )
+
+        const user = userEvent.setup()
+
         const titleInput = container.querySelector('[name=title]')
         const authorInput = container.querySelector('[name=author]')
         const urlInput = container.querySelector('[name=url]')
