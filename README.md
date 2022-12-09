@@ -16,6 +16,6 @@
 |----------------------------------------------------------------------------------------------------|-----|------------------------------------------------------------------------------------------|  
 | **Part 4:** Testing Express servers, <br/>user administration                                      |     | **Part 5:** Testing React apps                                                           |
 
-| [![](https://i.ibb.co/3BXM7SW/part6.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part6) |     | [![](https://i.ibb.co/SnVP2KV/part7.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part7) |      
+| [![](https://i.ibb.co/TgK0Bfv/part6.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part6) |     | [![](https://i.ibb.co/SnVP2KV/part7.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part7) |      
 |----------------------------------------------------------------------------------------------------|-----|----------------------------------------------------------------------------------------------------|  
 | **Part 6:** State management with Redux                                                            |     | **Part 7:** React router, custom hooks, <br/>styling app with CSS and webpack                      |
