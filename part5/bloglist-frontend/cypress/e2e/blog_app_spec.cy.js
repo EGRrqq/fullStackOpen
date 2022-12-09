@@ -19,7 +19,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login form is shown', function() {
+  it('login form is shown', function() {
     cy.contains('log in to application')
 
     cy.get('#username')
@@ -46,12 +46,12 @@ describe('Blog app', function() {
     })
   })
 
-  describe('When logged in', function() {
+  describe('when logged in', function() {
     beforeEach(function() {
       cy.login({ username: 'ilovejerseyclub', password: 'ilovejerseyclub' })
     })
 
-    it('A blog can be created', function() {
+    it('a blog can be created', function() {
       cy.contains('new blog').click()
 
       cy.get('#title').type('ilovejerseyclub')
@@ -62,7 +62,7 @@ describe('Blog app', function() {
       cy.contains('a new blog ilovejerseyclub by e added')
     })
 
-    describe('and one blog is added', function() {
+    describe('one blog is added', function() {
       beforeEach(function() {
         cy.createBlog({ title: 'ilovejerseyclubsomuch', author: 'e', url: 'https://soundcloud.com/' })
       })
@@ -86,6 +86,20 @@ describe('Blog app', function() {
         cy.contains('button', 'show').click()
         cy.contains('button', 'remove').click()
         cy.contains('only the author of the blog can delete it')
+      })
+    })
+
+    describe('several blogs are added', function() {
+      beforeEach(function() {
+        cy.createBlog({ title: 'must be the LAST', author: 'e', url: '.com' })
+        cy.createBlog({ title: 'must be the FIRST', author: 'e', url: '.com', likes: 534 })
+        cy.createBlog({ title: 'must be the SECOND', author: 'e', url: '.com', likes: 3 })
+      })
+
+      it('blogs should be sorted correctly', function() {
+        cy.get('.blog-container').eq(0).should('contain', 'FIRST')
+        cy.get('.blog-container').eq(1).should('contain', 'SECOND')
+        cy.get('.blog-container').eq(2).should('contain', 'LAST')
       })
     })
   })
