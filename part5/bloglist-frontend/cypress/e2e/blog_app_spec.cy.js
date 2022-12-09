@@ -14,8 +14,10 @@ describe('Blog app', function() {
 
   it('Login form is shown', function() {
     cy.contains('log in to application')
+
     cy.get('#username')
     cy.get('#password')
+
     cy.contains('button', 'login')
   })
 
@@ -23,7 +25,7 @@ describe('Blog app', function() {
     it('succeeds with correct credentials', function() {
       cy.get('#username').type('ilovejerseyclub')
       cy.get('#password').type('ilovejerseyclub')
-      
+
       cy.contains('button', 'login').click()
       cy.contains('ilovejerseyclub logged in')
     })
@@ -34,6 +36,23 @@ describe('Blog app', function() {
 
       cy.contains('button', 'login').click()
       cy.contains('invalid username or password')
+    })
+  })
+
+  describe('When logged in', function() {
+    beforeEach(function() {
+      cy.login({ username: 'ilovejerseyclub', password: 'ilovejerseyclub' })
+    })
+
+    it('A blog can be created', function() {
+      cy.contains('new blog').click()
+
+      cy.get('#title').type('ilovejerseyclub')
+      cy.get('#author').type('e')
+      cy.get('#url').type('https://soundcloud.com/')
+
+      cy.contains('button', 'create').click()
+      cy.contains('a new blog ilovejerseyclub by e added')
     })
   })
 })
