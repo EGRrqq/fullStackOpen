@@ -8,10 +8,14 @@
 |--------------------------------------------------------------------------------------------------|-----|--------------------------------------------------------------------------------------------------|      
 | **Part 0:** Fundamentals of Web apps                                                                 |     | **Part 1:** Introduction to React                                                                    | 
 
-| [![](https://i.ibb.co/q9CQTfC/part2.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part2) |     | [![](https://i.ibb.co/NYKwY7L/part3-new.jpg)](https://github.com/EGRrqq/fullStackOpen_part3) |      
+| [![](https://i.ibb.co/wg9frB3/part2-new2.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part2) |     | [![](https://i.ibb.co/NYKwY7L/part3-new.jpg)](https://github.com/EGRrqq/fullStackOpen_part3) |      
 |--------------------------------------------------------------------------------------------------|-----|--------------------------------------------------------------------------------------------------|  
 | **Part 2:** Communicating with server                                                                |     | **Part 3:** Programming a server <br/>with NodeJS and Express                                        | 
 
 | [![](https://i.ibb.co/WxnkQMK/part4.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part4) |     | [![](https://i.ibb.co/y48xPFT/part5.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part5) |      
 |----------------------------------------------------------------------------------------------------|-----|------------------------------------------------------------------------------------------|  
 | **Part 4:** Testing Express servers, <br/>user administration                                      |     | **Part 5:** Testing React apps                                                           |
+
+| [![](https://i.ibb.co/3BXM7SW/part6.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part6) |     | [![](https://i.ibb.co/SnVP2KV/part7.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part7) |      
+|----------------------------------------------------------------------------------------------------|-----|----------------------------------------------------------------------------------------------------|  
+| **Part 6:** State management with Redux                                                            |     | **Part 7:** React router, custom hooks, <br/>styling app with CSS and webpack                      |
