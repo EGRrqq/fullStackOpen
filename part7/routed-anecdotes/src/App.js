@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
-    BrowserRouter as Router,
-    Routes, Route, Link, useMatch
+    Routes, Route, Link, useMatch, useNavigate
 } from "react-router-dom"
 
 const Menu = () => {
@@ -100,7 +99,14 @@ const CreateNew = (props) => {
       </form>
     </div>
   )
+}
 
+const Notification = ({ notification }) => {
+    return (
+        <div>
+            {notification === '' ? null : notification}
+        </div>
+    )
 }
 
 const App = () => {
@@ -126,6 +132,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+      setNotification(`a new anecdote ${anecdote.content} created!`)
+      setTimeout(() => {
+          setNotification('')
+      }, 5000)
   }
 
   const anecdoteById = (id) =>
@@ -152,6 +162,7 @@ const App = () => {
             <h1>Software anecdotes</h1>
 
             <Menu />
+            <Notification notification={notification} />
             <Routes>
                 <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
                 <Route path="/create" element={<CreateNew addNew={addNew} />} />
