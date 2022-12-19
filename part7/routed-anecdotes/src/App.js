@@ -1,16 +1,20 @@
 import { useState } from 'react'
+import {
+    BrowserRouter as Router,
+    Routes, Route, Link
+} from "react-router-dom"
 
 const Menu = () => {
   const padding = {
     paddingRight: 5
   }
-  return (
-    <div>
-      <a href='#' style={padding}>anecdotes</a>
-      <a href='#' style={padding}>create new</a>
-      <a href='#' style={padding}>about</a>
-    </div>
-  )
+    return (
+        <div>
+            <Link style={padding} to="/">anecdotes</Link>
+            <Link style={padding} to="/create">create new</Link>
+            <Link style={padding} to="/about">about</Link>
+        </div>
+    )
 }
 
 const AnecdoteList = ({ anecdotes }) => (
@@ -122,16 +126,21 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
-  return (
-    <div>
-      <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
-      <Footer />
-    </div>
-  )
+    return (
+        <div>
+            <h1>Software anecdotes</h1>
+
+            <Router>
+                <Menu />
+                <Routes>
+                    <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+                    <Route path="/create" element={<CreateNew addNew={addNew} />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+                <Footer />
+            </Router>
+        </div>
+    )
 }
 
 export default App
