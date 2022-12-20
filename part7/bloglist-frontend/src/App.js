@@ -10,13 +10,14 @@ import loginService from './services/login'
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
-    const [notification, setNotification] = useState({ type: null, content: null })
+    const [notification, setNotification] = useState({
+        type: null,
+        content: null,
+    })
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        blogService.getAll().then(blogs =>
-            setBlogs( blogs )
-        )
+        blogService.getAll().then((blogs) => setBlogs(blogs))
     }, [])
 
     useEffect(() => {
@@ -136,15 +137,20 @@ const App = () => {
 
             <h2>create new</h2>
 
-            <Togglable buttonLabel='new blog' ref={blogFormRef}>
+            <Togglable buttonLabel="new blog" ref={blogFormRef}>
                 <BlogForm createBlog={addBlog} />
             </Togglable>
 
             {blogs
                 .sort((a, b) => b.likes - a.likes)
-                .map(blog =>
-                    <Blog key={blog.id} blog={blog} updateBlog={handleLike} deleteBlog={handleRemove}/>
-                )}
+                .map((blog) => (
+                    <Blog
+                        key={blog.id}
+                        blog={blog}
+                        updateBlog={handleLike}
+                        deleteBlog={handleRemove}
+                    />
+                ))}
         </div>
     )
 }

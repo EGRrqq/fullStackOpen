@@ -17,9 +17,9 @@ const LoginForm = ({ submitUser }) => {
             <div>
                 username
                 <input
-                    id='username'
-                    type='text'
-                    name='username'
+                    id="username"
+                    type="text"
+                    name="username"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
                 />
@@ -27,14 +27,16 @@ const LoginForm = ({ submitUser }) => {
             <div>
                 password
                 <input
-                    id='password'
-                    type='password'
-                    name='password'
+                    id="password"
+                    type="password"
+                    name="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                 />
             </div>
-            <button type="submit" id='login-button'>login</button>
+            <button type="submit" id="login-button">
+                login
+            </button>
         </form>
     )
 }
@@ -44,4 +46,3 @@ LoginForm.propTypes = {
 }
 
 export default LoginForm
-

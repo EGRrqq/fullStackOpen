@@ -14,14 +14,14 @@ const BlogForm = ({ createBlog }) => {
         setUrl('')
     }
 
-    return(
+    return (
         <form onSubmit={handleCreate}>
             <div>
                 title:
                 <input
-                    id='title'
-                    type='text'
-                    name='title'
+                    id="title"
+                    type="text"
+                    name="title"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                 />
@@ -29,9 +29,9 @@ const BlogForm = ({ createBlog }) => {
             <div>
                 author:
                 <input
-                    id='author'
-                    type='text'
-                    name='author'
+                    id="author"
+                    type="text"
+                    name="author"
                     value={author}
                     onChange={(event) => setAuthor(event.target.value)}
                 />
@@ -39,9 +39,9 @@ const BlogForm = ({ createBlog }) => {
             <div>
                 url:
                 <input
-                    id='url'
-                    type='text'
-                    name='url'
+                    id="url"
+                    type="text"
+                    name="url"
                     onChange={(event) => setUrl(event.target.value)}
                     value={url}
                 />

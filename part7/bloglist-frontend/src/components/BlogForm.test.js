@@ -14,9 +14,7 @@ describe('<BlogForm />', () => {
     const mockHandler = jest.fn()
 
     test('form calls the event handler when a new blog is created', async () => {
-        const { container } = render(
-            <BlogForm createBlog={mockHandler} />
-        )
+        const { container } = render(<BlogForm createBlog={mockHandler} />)
 
         const user = userEvent.setup()
 
@@ -33,6 +31,10 @@ describe('<BlogForm />', () => {
         await user.click(submitButton)
 
         expect(mockHandler.mock.calls).toHaveLength(1)
-        expect(mockHandler.mock.calls[0][0]).toEqual( {"author": blog.author, "title": blog.title, "url": blog.url})
+        expect(mockHandler.mock.calls[0][0]).toEqual({
+            author: blog.author,
+            title: blog.title,
+            url: blog.url,
+        })
     })
 })
