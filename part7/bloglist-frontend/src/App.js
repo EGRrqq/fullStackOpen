@@ -8,13 +8,13 @@ import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+import { useDispatch } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
+
 const App = () => {
     const [blogs, setBlogs] = useState([])
-    const [notification, setNotification] = useState({
-        type: null,
-        content: null,
-    })
     const [user, setUser] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -40,18 +40,8 @@ const App = () => {
             setUser(user)
         } catch (exception) {
             console.log(exception)
-            setNotification({
-                type: 'error',
-                content: exception.response.data.error,
-            })
-            clearNotification()
+            dispatch(setNotification(exception.response.data.error, 5))
         }
-    }
-
-    const clearNotification = () => {
-        setTimeout(() => {
-            setNotification({ type: null, content: null })
-        }, 5000)
     }
 
     const handleLogout = () => {
@@ -64,18 +54,15 @@ const App = () => {
             blogFormRef.current.toggleVisibility()
             const createdBlog = await blogService.create(blogObject)
             setBlogs(blogs.concat(createdBlog))
-            setNotification({
-                type: 'success',
-                content: `a new blog ${createdBlog.title} by ${createdBlog.author} added`,
-            })
-            clearNotification()
+            dispatch(
+                setNotification(
+                    `a new blog '${createdBlog.title}' by ${createdBlog.author} added`,
+                    5
+                )
+            )
         } catch (exception) {
             console.log(exception)
-            setNotification({
-                type: 'error',
-                content: exception.response.data.error,
-            })
-            clearNotification()
+            dispatch(setNotification(exception.response.data.error, 5))
         }
     }
 
@@ -89,13 +76,10 @@ const App = () => {
                     blog.id === updatedBlog.id ? updatedBlog : blog
                 )
             )
+            dispatch(setNotification(`you liked '${updatedBlog.title}'`, 5))
         } catch (exception) {
             console.log(exception)
-            setNotification({
-                type: 'error',
-                content: exception.response.data.error,
-            })
-            clearNotification()
+            dispatch(setNotification(exception.response.data.error, 5))
         }
     }
 
@@ -105,11 +89,7 @@ const App = () => {
             setBlogs(blogs.filter((blog) => blog.id !== blogId))
         } catch (exception) {
             console.log(exception)
-            setNotification({
-                type: 'error',
-                content: exception.response.data.error,
-            })
-            clearNotification()
+            dispatch(setNotification(exception.response.data.error, 5))
         }
     }
 
@@ -118,7 +98,7 @@ const App = () => {
             <div>
                 <h2>log in to application</h2>
 
-                <Notification message={notification} />
+                <Notification />
                 <LoginForm submitUser={handleLogin} />
             </div>
         )
@@ -128,7 +108,7 @@ const App = () => {
         <div>
             <h2>blogs</h2>
 
-            <Notification message={notification} />
+            <Notification />
 
             <p>
                 {user.username} logged in
