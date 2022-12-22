@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Route, Routes } from 'react-router-dom'
 
 import BlogList from './components/BlogList'
+import UserList from './components/UserList'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import LogoutForm from './components/LogoutForm'
 import { initializeUser } from './reducers/userReducer'
+import { initializeUsers } from './reducers/usersReducer'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -13,13 +16,12 @@ const App = () => {
 
     useEffect(() => {
         dispatch(initializeUser())
+        dispatch(initializeUsers())
     }, [])
 
     if (user === null) {
         return (
             <div>
-                <h2>log in to application</h2>
-
                 <Notification />
                 <LoginForm />
             </div>
@@ -33,8 +35,10 @@ const App = () => {
             <Notification />
             <LogoutForm />
 
-            <h2>create new</h2>
-            <BlogList />
+            <Routes>
+                <Route path='/' element={<BlogList />} />
+                <Route path='/users' element={<UserList />} />
+            </Routes>
         </div>
     )
 }

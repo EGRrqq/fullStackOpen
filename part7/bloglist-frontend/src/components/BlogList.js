@@ -21,6 +21,8 @@ const BlogList = () => {
 
     return (
         <>
+            <h2>create new</h2>
+
             <Togglable buttonLabel="new blog" ref={blogFormRef}>
                 <BlogForm changeVisibility={handleVisibility} />
             </Togglable>
