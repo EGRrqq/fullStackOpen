@@ -1,47 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BlogList from './components/BlogList'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
-
-import blogService from './services/blogs'
-import loginService from './services/login'
-
-import { useDispatch } from 'react-redux'
-import { setNotification } from './reducers/notificationReducer'
+import LogoutForm from './components/LogoutForm'
+import { initializeUser } from './reducers/userReducer'
 
 const App = () => {
-    const [user, setUser] = useState(null)
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.user)
 
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
-        if (loggedUserJSON) {
-            const user = JSON.parse(loggedUserJSON)
-            setUser(user)
-            blogService.setToken(user.token)
-        }
+        dispatch(initializeUser())
     }, [])
-
-    const handleLogin = async (userCredentials) => {
-        try {
-            const user = await loginService.login(userCredentials)
-            blogService.setToken(user.token)
-            window.localStorage.setItem(
-                'loggedBloglistUser',
-                JSON.stringify(user)
-            )
-            setUser(user)
-        } catch (exception) {
-            console.log(exception)
-            dispatch(setNotification(exception.response.data.error, 5))
-        }
-    }
-
-    const handleLogout = () => {
-        window.localStorage.removeItem('loggedBloglistUser')
-        setUser(null)
-    }
 
     if (user === null) {
         return (
@@ -49,7 +21,7 @@ const App = () => {
                 <h2>log in to application</h2>
 
                 <Notification />
-                <LoginForm submitUser={handleLogin} />
+                <LoginForm />
             </div>
         )
     }
@@ -59,11 +31,7 @@ const App = () => {
             <h2>blogs</h2>
 
             <Notification />
-
-            <p>
-                {user.username} logged in
-                <button onClick={handleLogout}>logout</button>
-            </p>
+            <LogoutForm />
 
             <h2>create new</h2>
             <BlogList />
