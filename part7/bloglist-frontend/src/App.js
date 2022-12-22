@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import BlogList from './components/BlogList'
 import UserList from './components/UserList'
+import UserDetails from './components/UserDetails'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import LogoutForm from './components/LogoutForm'
@@ -36,8 +37,9 @@ const App = () => {
             <LogoutForm />
 
             <Routes>
-                <Route path='/' element={<BlogList />} />
-                <Route path='/users' element={<UserList />} />
+                <Route path="/" element={<BlogList />} />
+                <Route path="/users" element={<UserList />} />
+                <Route path="/users/:id" element={<UserDetails />} />
             </Routes>
         </div>
     )

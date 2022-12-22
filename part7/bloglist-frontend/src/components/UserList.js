@@ -12,7 +12,9 @@ const UserList = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th><strong>blogs created</strong></th>
+                        <th>
+                            <strong>blogs created</strong>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
