@@ -1,13 +1,13 @@
 import React from 'react'
-import { useMatch } from 'react-router-dom'
+import { Link, useMatch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-const UserDetail = () => {
+const UserDetails = () => {
     const users = useSelector((state) => state.users)
 
     const userMatch = useMatch('/users/:id')
     const matchedUser = userMatch
-        ? users.find(user => user.id === userMatch.params.id)
+        ? users.find((user) => user.id === userMatch.params.id)
         : null
 
     if (!matchedUser) {
@@ -20,11 +20,13 @@ const UserDetail = () => {
             <h3>added blogs</h3>
             <ul>
                 {matchedUser.blogs.map((blog) => (
-                    <li key={blog.id}>{blog.title}</li>
+                    <li key={blog.id}>
+                        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                    </li>
                 ))}
             </ul>
         </>
     )
 }
 
-export default UserDetail
+export default UserDetails

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 
+import Blog from './components/Blog'
 import BlogList from './components/BlogList'
 import UserList from './components/UserList'
 import UserDetails from './components/UserDetails'
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/" element={<BlogList />} />
                 <Route path="/users" element={<UserList />} />
                 <Route path="/users/:id" element={<UserDetails />} />
+                <Route path="/blogs/:id" element={<Blog />} />
             </Routes>
         </div>
     )

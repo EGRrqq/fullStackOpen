@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const User = ({ user }) => {
@@ -10,6 +11,10 @@ const User = ({ user }) => {
             <td>{user.blogs.length}</td>
         </tr>
     )
+}
+
+User.propTypes = {
+    user: PropTypes.object.isRequired,
 }
 
 export default User
