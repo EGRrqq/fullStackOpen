@@ -8,10 +8,10 @@ const LogoutForm = () => {
     const user = useSelector((state) => state.user)
 
     return (
-        <p>
+        <>
             {user.username} logged in
             <button onClick={() => dispatch(logoutUser())}>logout</button>
-        </p>
+        </>
     )
 }
 

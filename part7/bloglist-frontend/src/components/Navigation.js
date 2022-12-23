@@ -9,10 +9,10 @@ const navigationStyle = {
 const Navigation = () => {
     return (
         <div style={navigationStyle}>
-            <Link style={{ padding: 5 }} to="/">
+            <Link style={{ paddingRight: 10 }} to="/">
                 blogs
             </Link>
-            <Link style={{ padding: 5 }} to="/users">
+            <Link style={{ paddingRight: 10 }} to="/users">
                 users
             </Link>
             <LogoutForm />
