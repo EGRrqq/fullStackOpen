@@ -2,6 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteBlog, likeBlog } from '../reducers/blogReducer'
 import { useMatch, useNavigate } from 'react-router-dom'
+import Comments from './Comments'
+import CommentForm from './CommentForm'
 
 const Blog = () => {
     const blogs = useSelector((state) => state.blogs)
@@ -47,6 +49,9 @@ const Blog = () => {
             <button onClick={removeBlog} id="remove-button">
                 remove
             </button>
+            <h3>comments</h3>
+            <CommentForm blog={matchedBlog} />
+            <Comments comments={matchedBlog.comments} />
         </div>
     )
 }

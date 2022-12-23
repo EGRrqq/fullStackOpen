@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import LogoutForm from './LogoutForm'
 
 const navigationStyle = {
-    background: '#E0E0E0'
+    background: '#E0E0E0',
 }
 
 const Navigation = () => {
