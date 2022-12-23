@@ -8,7 +8,7 @@ import UserList from './components/UserList'
 import UserDetails from './components/UserDetails'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
-import LogoutForm from './components/LogoutForm'
+import Navigation from './components/Navigation'
 import { initializeUser } from './reducers/userReducer'
 import { initializeUsers } from './reducers/usersReducer'
 
@@ -32,10 +32,10 @@ const App = () => {
 
     return (
         <div>
-            <h2>blogs</h2>
-
+            <Navigation />
+            <h2>blog app</h2>
             <Notification />
-            <LogoutForm />
+
 
             <Routes>
                 <Route path="/" element={<BlogList />} />
