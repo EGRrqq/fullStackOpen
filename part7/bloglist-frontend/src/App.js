@@ -12,6 +12,8 @@ import Navigation from './components/Navigation'
 import { initializeUser } from './reducers/userReducer'
 import { initializeUsers } from './reducers/usersReducer'
 
+import { Container } from '@mui/material'
+
 const App = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
@@ -31,7 +33,7 @@ const App = () => {
     }
 
     return (
-        <div>
+        <Container>
             <Navigation />
             <h2>blog app</h2>
             <Notification />
@@ -42,7 +44,7 @@ const App = () => {
                 <Route path="/users/:id" element={<UserDetails />} />
                 <Route path="/blogs/:id" element={<Blog />} />
             </Routes>
-        </div>
+        </Container>
     )
 }
 

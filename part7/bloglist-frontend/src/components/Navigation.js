@@ -2,22 +2,25 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import LogoutForm from './LogoutForm'
 
-const navigationStyle = {
-    background: '#E0E0E0',
-}
+import { AppBar, Toolbar, Button } from '@mui/material'
 
 const Navigation = () => {
     return (
-        <div style={navigationStyle}>
-            <Link style={{ paddingRight: 10 }} to="/">
-                blogs
-            </Link>
-            <Link style={{ paddingRight: 10 }} to="/users">
-                users
-            </Link>
-            <LogoutForm />
-        </div>
+        <AppBar position="static">
+            <Toolbar>
+                <Button color="inherit" component={Link} to="/">
+                    blogs
+                </Button>
+                <Button color="inherit" component={Link} to="/users">
+                    users
+                </Button>
+                <LogoutForm />
+            </Toolbar>
+        </AppBar>
     )
 }
+
+
+
 
 export default Navigation

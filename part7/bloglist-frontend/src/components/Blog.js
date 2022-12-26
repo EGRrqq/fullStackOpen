@@ -5,6 +5,15 @@ import { useMatch, useNavigate } from 'react-router-dom'
 import Comments from './Comments'
 import CommentForm from './CommentForm'
 
+import {
+    ButtonGroup,
+    Button,
+    Card,
+    CardContent,
+} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+
 const Blog = () => {
     const blogs = useSelector((state) => state.blogs)
     const dispatch = useDispatch()
@@ -37,18 +46,25 @@ const Blog = () => {
 
     return (
         <div className="blog-details">
-            <h2>{matchedBlog.title}</h2>
-            <div>{matchedBlog.url}</div>
-            <div>
-                likes: {matchedBlog.likes}
-                <button onClick={incrementLikes} id="like-button">
-                    like
-                </button>
-            </div>
-            <div>added by {matchedBlog.author}</div>
-            <button onClick={removeBlog} id="remove-button">
-                remove
-            </button>
+
+            <Card>
+                <CardContent>
+                    <h2>{matchedBlog.title}</h2>
+                    <p>{matchedBlog.url}</p>
+                    <p>likes: {matchedBlog.likes}</p>
+                    <p>added by {matchedBlog.author}</p>
+
+                    <ButtonGroup>
+                        <Button variant="contained" color='error' size='small' startIcon={<DeleteIcon />} onClick={removeBlog} id="remove-button">
+                            remove
+                        </Button>
+                        <Button variant="contained" size='small' endIcon={<ThumbUpIcon />} onClick={incrementLikes} id="like-button">
+                            like
+                        </Button>
+                    </ButtonGroup>
+                </CardContent>
+            </Card>
+
             <h3>comments</h3>
             <CommentForm blog={matchedBlog} />
             <Comments comments={matchedBlog.comments} />

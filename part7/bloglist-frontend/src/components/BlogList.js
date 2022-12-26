@@ -6,18 +6,19 @@ import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 import { Link } from 'react-router-dom'
 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Paper,
+} from '@mui/material'
+
 const BlogList = () => {
     const dispatch = useDispatch()
     const blogs = useSelector((state) => state.blogs)
     const blogFormRef = useRef()
-
-    const blogStyle = {
-        paddingTop: 10,
-        paddingLeft: 2,
-        border: 'solid',
-        borderWidth: 1,
-        marginBottom: 5,
-    }
 
     useEffect(() => {
         dispatch(initializeBlogs())
@@ -33,19 +34,25 @@ const BlogList = () => {
                 <BlogForm changeVisibility={handleVisibility} />
             </Togglable>
 
-            {[...blogs]
-                .sort((a, b) => b.likes - a.likes)
-                .map((blog) => (
-                    <div
-                        key={blog.id}
-                        style={blogStyle}
-                        className="blog-container"
-                    >
-                        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-                    </div>
-                ))}
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableBody>
+                        {[...blogs]
+                            .sort((a, b) => b.likes - a.likes)
+                            .map((blog) => (
+                                <TableRow key={blog.id} className="blog-container">
+                                    <TableCell>
+                                        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     )
+
+
 }
 
 export default BlogList

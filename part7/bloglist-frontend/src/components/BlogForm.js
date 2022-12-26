@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 
+import { Button, Input } from '@mui/material'
+
 const BlogForm = ({ changeVisibility }) => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -23,8 +25,8 @@ const BlogForm = ({ changeVisibility }) => {
     return (
         <form onSubmit={handleCreate}>
             <div>
-                title:
-                <input
+                <Input
+                    placeholder="title"
                     id="title"
                     type="text"
                     name="title"
@@ -33,8 +35,8 @@ const BlogForm = ({ changeVisibility }) => {
                 />
             </div>
             <div>
-                author:
-                <input
+                <Input
+                    placeholder="author"
                     id="author"
                     type="text"
                     name="author"
@@ -43,8 +45,8 @@ const BlogForm = ({ changeVisibility }) => {
                 />
             </div>
             <div>
-                url:
-                <input
+                <Input
+                    placeholder="url"
                     id="url"
                     type="text"
                     name="url"
@@ -52,7 +54,7 @@ const BlogForm = ({ changeVisibility }) => {
                     value={url}
                 />
             </div>
-            <button type="submit">create</button>
+            <Button variant="contained" color="primary" type="submit" size='small'>create</Button>
         </form>
     )
 }

@@ -2,6 +2,15 @@ import React from 'react'
 import { Link, useMatch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Paper,
+} from '@mui/material'
+
 const UserDetails = () => {
     const users = useSelector((state) => state.users)
 
@@ -16,15 +25,21 @@ const UserDetails = () => {
 
     return (
         <>
-            <h2>{matchedUser.username}</h2>
-            <h3>added blogs</h3>
-            <ul>
-                {matchedUser.blogs.map((blog) => (
-                    <li key={blog.id}>
-                        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-                    </li>
-                ))}
-            </ul>
+            <h3>{matchedUser.username} added blogs</h3>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableBody>
+                        {matchedUser.blogs
+                            .map((blog) => (
+                                <TableRow key={blog.id}>
+                                    <TableCell>
+                                        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     )
 }

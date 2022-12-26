@@ -2,28 +2,39 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import User from './User'
 
+import {
+    TableContainer,
+    Table,
+    TableBody,
+    TableHead,
+    TableRow,
+    TableCell,
+    Paper
+} from '@mui/material'
+
 const UserList = () => {
     const users = useSelector((state) => state.users)
 
     return (
-        <>
-            <h2>Users</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>
+                            <strong>users</strong>
+                        </TableCell>
+                        <TableCell>
                             <strong>blogs created</strong>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {users.map((user) => (
                         <User key={user.id} user={user} />
                     ))}
-                </tbody>
-            </table>
-        </>
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 }
 
