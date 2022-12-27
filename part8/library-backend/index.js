@@ -90,11 +90,13 @@ const typeDefs = gql`
     name: String!
     born: Int
     id: ID!
+    bookCount: Int!
   }
   type Query {
     bookCount: Int!
     authorCount: Int!
     allBooks: [Book!]!
+    allAuthors: [Author!]!
   }
 `
 
@@ -102,7 +104,15 @@ const resolvers = {
     Query: {
         bookCount: () => books.length,
         authorCount: () => authors.length,
-        allBooks: () => books
+        allBooks: () => books,
+        allAuthors: () => authors
+    },
+    Author: {
+        bookCount: (root) => {
+            return books
+                .filter(book => book.author === root.name)
+                .length
+        }
     }
 }
 
