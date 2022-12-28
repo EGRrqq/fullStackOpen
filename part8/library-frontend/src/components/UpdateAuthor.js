@@ -13,7 +13,7 @@ const UpdateAuthor = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        editAuthor({ variables: { name, year: Number(born) } })
+        editAuthor({ variables: { name, setBornTo: Number(born) } })
 
         setName('')
         setBorn('')
