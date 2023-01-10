@@ -114,17 +114,16 @@ const resolvers = {
                 throw new AuthenticationError('not authorized')
             }
 
-            const author = await Author.findOne({ name : args.author })
-            if (!author) {
-                const newAuthor = new Author({ name: args.author })
+            const author =
+                (await Author.findOne({ name: args.author })) ||
+                new Author({ name: args.author })
 
-                try {
-                    await newAuthor.save()
-                } catch (error) {
-                    throw new UserInputError(error.message, {
-                        invalidArgs: { author: args.author }
-                    })
-                }
+            try {
+                await author.save()
+            } catch (error) {
+                throw new UserInputError(error.message, {
+                    invalidArgs: { author: args.author },
+                })
             }
 
             const book = new Book({ ...args, author })
