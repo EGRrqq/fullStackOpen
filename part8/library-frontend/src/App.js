@@ -28,8 +28,9 @@ const App = () => {
 
     if (!token) {
         return (
-            <div>
+            <>
                 <Notify errorMessage={errorMessage} />
+
                 <div>
                     <button onClick={() => setPage('authors')}>authors</button>
                     <button onClick={() => setPage('books')}>books</button>
@@ -37,18 +38,16 @@ const App = () => {
                 </div>
 
                 <Authors show={page === 'authors'} />
-
                 <Books show={page === 'books'} />
-
                 <LoginForm show={page === 'login'} setToken={setToken} setError={notify} setPage={setPage}/>
-            </div>
+            </>
         )
     }
 
 
 
     return (
-        <div>
+        <>
             <div>
                 <button onClick={() => setPage('authors')}>authors</button>
                 <button onClick={() => setPage('books')}>books</button>
@@ -57,12 +56,9 @@ const App = () => {
             </div>
 
             <Authors show={page === 'authors'} />
-
             <Books show={page === 'books'} />
-
             <NewBook show={page === 'add'} />
-
-        </div>
+        </>
     )
 }
 export default App
