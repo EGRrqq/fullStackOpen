@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApolloClient } from '@apollo/client'
 
 import Authors from './components/Authors'
@@ -13,6 +13,10 @@ const App = () => {
     const [token, setToken] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
     const client = useApolloClient()
+
+    useEffect(() => {
+        setToken(localStorage.getItem('library-token'))
+    }, []) // eslint-disable-line
 
     const notify = (message) => {
         setErrorMessage(message)

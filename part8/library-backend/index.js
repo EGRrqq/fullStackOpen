@@ -139,21 +139,22 @@ const resolvers = {
                 throw new AuthenticationError('not authorized')
             }
 
-            const author = await Author.findOne({ name : args.name })
+            const author = await Author.findOne({ name: args.name })
 
-            if (author) {
-                author.born = args.setBornTo
-
-                try {
-                    await author.save()
-                } catch (error) {
-                    throw new UserInputError(error.message, {
-                        invalidArgs: { setBornTo: args.setBornTo },
-                    })
-                }
-                return author
+            if (!author) {
+                return null
             }
-            return null
+            author.born = args.setBornTo
+
+            try {
+                await author.save()
+            } catch (error) {
+                throw new UserInputError(error.message, {
+                    invalidArgs: { setBornTo: args.setBornTo },
+                })
+            }
+
+            return author
         },
         createUser: async (root, args) => {
             const user = new User({ ...args })

@@ -15,6 +15,7 @@ const Authors = (props) => {
   }
 
   const authors = result.data.allAuthors
+  console.log(authors)
 
   return (
       <div>
@@ -35,7 +36,7 @@ const Authors = (props) => {
           ))}
           </tbody>
         </table>
-        {props.user && <UpdateAuthor authors={authors} />}
+          <UpdateAuthor authors={authors} />
       </div>
   )
 }
