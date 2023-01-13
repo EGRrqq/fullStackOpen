@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm'
 import Notify from './components/Notify'
 import Recommended from "./components/Recommended"
 
-import { BOOK_ADDED } from './queries'
+import { BOOK_ADDED, ALL_BOOKS } from './queries'
 
 const App = () => {
     const [page, setPage] = useState('authors')
@@ -21,6 +21,12 @@ const App = () => {
             console.log(data)
             const addedBook = data.data.bookAdded
             window.alert(`Added ${addedBook.title} by ${addedBook.author.name}`)
+
+            client.cache.updateQuery({ query: ALL_BOOKS }, ({ allBooks }) => {
+                return {
+                    allBooks: allBooks.concat(addedBook),
+                }
+            })
         },
     })
 
