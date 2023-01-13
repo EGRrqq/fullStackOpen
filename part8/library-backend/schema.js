@@ -12,6 +12,7 @@ const typeDefs = gql`
     name: String!
     born: Int
     id: ID!
+    books: [Book!]!
     bookCount: Int!
   }
   type User {

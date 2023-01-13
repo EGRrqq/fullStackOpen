@@ -30,17 +30,15 @@ const resolvers = {
 
             return filteredBooks
         },
-        allAuthors: async () => Author.find({}),
+        allAuthors: async () => Author.find({}).populate('books'),
         me: (root, args, context) => {
             return context.currentUser
         }
     },
     Author: {
         bookCount: async (root) => {
-            const author = await Author.find({ name: root.name })
-            const countedBooks = await Book.countDocuments({ author })
-            return countedBooks
-        }
+            return root.books.length;
+        },
     },
     Mutation: {
         addBook: async (root, args, context) => {
@@ -66,6 +64,7 @@ const resolvers = {
 
             try {
                 await book.save()
+                await author.updateOne({ $push: { books: book } })
             } catch (error) {
                 throw new UserInputError(error.message, {
                     invalidArgs: args,
@@ -73,7 +72,7 @@ const resolvers = {
             }
 
             pubsub.publish('BOOK_ADDED', { bookAdded: book })
-            return book
+            return await book.populate('author')
         },
         editAuthor: async (root, args, context) => {
             const currentUser = context.currentUser
