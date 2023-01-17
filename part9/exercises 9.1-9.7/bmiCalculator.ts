@@ -1,7 +1,7 @@
 const calculateBmi = (height: number, mass: number): string => {
     const bmi = mass/((height/100)**2);
 
-    switch(true) {
+    switch (true) {
         case bmi < 16:
             return 'Underweight (Severe thinness)';
         case bmi <= 16.9:
