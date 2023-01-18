@@ -70,10 +70,10 @@ const calculateExercises = (dailyExerciseHours: Array<number>, targetHours: numb
         ratingDescription,
         targetHours,
         average,
-    }
+    };
 
-    return result
-}
+    return result;
+};
 
 try {
     const { dailyExerciseHours, targetHours } = parseArgumentsExercise(process.argv);

@@ -29,4 +29,4 @@ export const calculateBmi = (height: number, mass: number): string => {
         default:
             return 'Something went wrong.';
     }
-}
+};
