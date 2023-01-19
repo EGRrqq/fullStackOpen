@@ -4,40 +4,20 @@ interface Result {
     success: boolean,
     rating: number,
     ratingDescription: string,
-    targetHours: number,
+    target: number,
     average: number
 }
 
-interface ExerciseValues {
-    dailyExerciseHours: Array<number>,
-    targetHours: number
-}
-
-const parseArgumentsExercise = (args: Array<string>): ExerciseValues => {
-    if (args.length < 4) throw new Error('Not enough arguments');
-
-    for (let i = 2; i < args.length; i++) {
-        if (isNaN(Number(args[i]))) {
-            throw new Error('Provided values were not numbers!');
-        }
-    }
-
-    return {
-        dailyExerciseHours: args.slice(3).map((el) => Number(el)),
-        targetHours: Number(args[2]),
-    };
-};
-
-const calculateExercises = (dailyExerciseHours: Array<number>, targetHours: number) : Result => {
-    const average = dailyExerciseHours.reduce((amount, hours) => amount + hours, 0) / dailyExerciseHours.length;
+export const calculateExercises = (days: Array<number>, target: number): Result => {
+    const average = days.reduce((amount, hours) => amount + hours, 0) / days.length;
 
     let rating = 0;
     const maxRating = 5;
 
-    if (average > targetHours) {
+    if (average > target) {
         rating = maxRating;
     } else {
-        rating = (average * maxRating)/(targetHours * 2);
+        rating = (average * maxRating)/(target*2);
     }
 
     let ratingDescription = '';
@@ -55,7 +35,7 @@ const calculateExercises = (dailyExerciseHours: Array<number>, targetHours: numb
         case rating < maxRating * 0.8:
             ratingDescription = 'good job';
             break;
-        case rating < maxRating:
+        case rating <= maxRating :
             ratingDescription = 'you are on a roll today';
             break;
         default:
@@ -63,25 +43,14 @@ const calculateExercises = (dailyExerciseHours: Array<number>, targetHours: numb
     }
 
     const result = {
-        periodLength: dailyExerciseHours.length,
-        trainingDays: dailyExerciseHours.filter(h => h != 0 ).length,
-        success: average >= targetHours,
+        periodLength: days.length,
+        trainingDays: days.filter(h => h != 0 ).length,
+        success: average >= target,
         rating,
         ratingDescription,
-        targetHours,
+        target,
         average,
     };
 
     return result;
 };
-
-try {
-    const { dailyExerciseHours, targetHours } = parseArgumentsExercise(process.argv);
-    console.log(calculateExercises(dailyExerciseHours, targetHours));
-} catch (error: unknown) {
-    let errorMessage = 'Something bad happened';
-    if (error instanceof Error) {
-        errorMessage += ' Error: ' + error.message;
-    }
-    console.log(errorMessage);
-}
