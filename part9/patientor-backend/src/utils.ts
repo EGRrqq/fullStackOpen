@@ -1,4 +1,4 @@
-import { NewPatient } from './types';
+import { Gender, NewPatient } from './types';
 
 const isString = (text: unknown): text is string => {
     return typeof text === 'string' || text instanceof String;
@@ -32,8 +32,15 @@ const parseSSN = (ssn: unknown): string => {
     return ssn;
 };
 
-const parseGender = (gender: unknown): string => {
-    if (!gender || !isString(gender)) {
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isGender = (gender: any): gender is Gender => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return Object.values(Gender).includes(gender);
+};
+
+const parseGender = (gender: unknown): Gender => {
+    if (!gender || !isGender(gender)) {
         throw new Error('Incorrect or missing gender');
     }
 

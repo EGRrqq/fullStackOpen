@@ -1,4 +1,4 @@
-import patients from '../../data/patients.json';
+import patients from '../../data/patients';
 // @ts-ignore
 import { v1 as uuid } from 'uuid';
 import { NewPatient, NonSensitivePatientData, Patient } from '../types';
