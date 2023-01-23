@@ -5,6 +5,7 @@ import { useStateValue, setPatientData } from "../state";
 import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
 import GenderIcon from "../components/GenderIcon";
+import Entries from "./Entries";
 
 const PatientDataPage = () => {
     const [{ patientData }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ const PatientDataPage = () => {
             <h2>{patientData?.name} <GenderIcon gender={patientData?.gender} /></h2>
             <div>ssh: {patientData?.ssn}</div>
             <div>occupation: {patientData?.occupation}</div>
+            <Entries entries={patientData?.entries} />
         </>
     );
 };
