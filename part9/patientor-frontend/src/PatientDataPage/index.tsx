@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useStateValue, setPatientData } from "../state";
 import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
+import GenderIcon from "../components/GenderIcon";
 
 const PatientDataPage = () => {
     const [{ patientData }, dispatch] = useStateValue();
@@ -22,7 +23,7 @@ const PatientDataPage = () => {
 
     return(
         <>
-            <h2>{patientData?.name}</h2>
+            <h2>{patientData?.name} <GenderIcon gender={patientData?.gender} /></h2>
             <div>ssh: {patientData?.ssn}</div>
             <div>occupation: {patientData?.occupation}</div>
         </>
