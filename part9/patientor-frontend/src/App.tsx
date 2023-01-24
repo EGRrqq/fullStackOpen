@@ -41,7 +41,7 @@ const App = () => {
           </Button>
           <Divider hidden />
           <Routes>
-            <Route path="patients/:id" element={<PatientDataPage />}/>
+            <Route path="patients/:id" element={<PatientDataPage />} />
             <Route path="/" element={<PatientListPage />} />
           </Routes>
         </Container>

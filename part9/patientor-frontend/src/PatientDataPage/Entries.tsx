@@ -1,36 +1,24 @@
-import React from "react";
-import { Entry } from "../types";
+import { Entry } from '../types';
+import OccupationalEntry from './OccupationalEntry';
+import HospitalEntry from './HospitalEntry';
+import HealthEntry from './HealthCheckEntry';
 
-interface EntriesProps {
-    entries?: Entry[];
-}
-
-const SingleEntry = ({ entry }: { entry: Entry }) => {
-    return (
-        <div>
-            <p>
-                {entry.date} {entry.description}
-            </p>
-            <ul>
-                {entry.diagnosisCodes?.map((code) => (
-                    <li key={code}>{code}</li>
-                ))}
-            </ul>
-        </div>
-    );
+const assertNever = (value: never): never => {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    throw new Error(`Value ${value} has not been handled`);
 };
 
-const Entries = ({ entries }: EntriesProps) => {
-    if (!entries) return null;
-
-    return (
-        <div>
-            <h3>entries</h3>
-            {entries.map((entry) => (
-                <SingleEntry key={entry.id} entry={entry} />
-            ))}
-        </div>
-    );
+const Entries = ({ entry }: { entry: Entry }) => {
+    switch(entry.type){
+        case "OccupationalHealthcare":
+            return <OccupationalEntry entry={entry} />;
+        case "Hospital":
+            return <HospitalEntry entry={entry} />;
+        case "HealthCheck":
+            return <HealthEntry entry={entry} />;
+        default:
+            return assertNever(entry);
+    }
 };
 
 export default Entries;
