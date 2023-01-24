@@ -19,3 +19,7 @@
 | [![](https://i.ibb.co/TgK0Bfv/part6.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part6) |     | [![](https://i.ibb.co/SnVP2KV/part7.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part7) |      
 |----------------------------------------------------------------------------------------------------|-----|----------------------------------------------------------------------------------------------------|  
 | **Part 6:** State management with Redux                                                            |     | **Part 7:** React router, custom hooks, <br/>styling app with CSS and webpack                      |
+
+| [![](https://i.ibb.co/q1DyvsN/part8.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part8) |     | [![](https://i.ibb.co/1mjTYwp/part9.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part9) |      
+|----------------------------------------------------------------------------------------------------|-----|----------------------------------------------------------------------------------------------------|  
+| **Part 8:** GraphQL                                                           |     | **Part 9:** TypeScript                  |
