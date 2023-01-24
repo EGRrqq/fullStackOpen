@@ -12,7 +12,7 @@
 |--------------------------------------------------------------------------------------------------|-----|--------------------------------------------------------------------------------------------------|  
 | **Part 2:** Communicating with server                                                                |     | **Part 3:** Programming a server <br/>with NodeJS and Express                                        | 
 
-| [![](https://i.ibb.co/WxnkQMK/part4.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part4) |     | [![](https://i.ibb.co/y48xPFT/part5.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part5) |      
+| [![](https://i.ibb.co/WxnkQMK/part4.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part4) |     | [![](https://i.ibb.co/MgZDQWj/part5-fix-border.jpg)](https://github.com/EGRrqq/fullStackOpen/tree/main/part5) |      
 |----------------------------------------------------------------------------------------------------|-----|------------------------------------------------------------------------------------------|  
 | **Part 4:** Testing Express servers, <br/>user administration                                      |     | **Part 5:** Testing React apps                                                           |
 
