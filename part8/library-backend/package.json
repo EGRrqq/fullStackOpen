@@ -20,7 +20,7 @@
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.11.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.1",
+    "mongoose": "^6.13.12",
     "ws": "^8.12.0"
   },
   "devDependencies": {
